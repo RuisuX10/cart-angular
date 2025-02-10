@@ -1,0 +1,9 @@
+<h2>Catalogo de productos App!</h2>
+
+<catalog [products]="products" (productEventEmitter)="addToCart($event)"/>
+
+@if (items.length > 0){
+    <cart [items]="items"/>
+} @else {
+    <div class="alert alert-warning">No hay productos en el carrito</div>
+}
