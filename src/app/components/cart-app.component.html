@@ -3,7 +3,11 @@
 <catalog [products]="products" (productEventEmitter)="addToCart($event)"/>
 
 @if (items.length > 0){
-    <cart [items]="items"/>
+    <cart 
+        [items]="items" 
+        [total]="total"
+        (idProductEventEmitter)="onDeleteCart($event)"
+    />
 } @else {
     <div class="alert alert-warning">No hay productos en el carrito</div>
 }
