@@ -1,13 +1,25 @@
-<h2>Catalogo de productos App!</h2>
+<app-navbar [items]="items" (openEventEmitter)="openCart()"/>
+<div class="container my-5">
+    <h2>Catalogo de productos App!</h2>
+    <button class="btn btn-primary" (click)="openCart()">Show cart ({{ items.length }})</button>
+    <div class="row">
+        <div [className]="showCart ? 'col-9' : 'col-12'">
+            <catalog [products]="products" (productEventEmitter)="addToCart($event)"/>
+        </div>
+        @if(showCart){
+            <div class="col-3">
+                <button class="btn btn-danger float-end" (click)="openCart()">X</button>
+                @if (items.length > 0){
+                    <cart 
+                    [items]="items" 
+                    [total]="total"
+                    (idProductEventEmitter)="onDeleteCart($event)"
+                    />
+                } @else {
+                    <div class="alert alert-warning">No hay productos en el carrito</div>
+                }
+            </div>
+        }
+</div>
+</div>
 
-<catalog [products]="products" (productEventEmitter)="addToCart($event)"/>
-
-@if (items.length > 0){
-    <cart 
-        [items]="items" 
-        [total]="total"
-        (idProductEventEmitter)="onDeleteCart($event)"
-    />
-} @else {
-    <div class="alert alert-warning">No hay productos en el carrito</div>
-}
